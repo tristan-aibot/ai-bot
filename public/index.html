@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Chat</title>
+  </head>
+  <body>
+    <h2>Stel je vraag aan de AI-bot:</h2>
+    <input type="text" id="vraag" />
+    <button onclick="verstuur()">Verstuur</button>
+    <p><strong>Antwoord:</strong> <span id="antwoord"></span></p>
+
+    <script>
+      async function verstuur() {
+        const vraag = document.getElementById("vraag").value;
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: vraag }),
+        });
+
+        const data = await res.json();
+        document.getElementById("antwoord").innerText = data.reply || data.error;
+      }
+    </script>
+  </body>
+</html>
