@@ -12,10 +12,14 @@
     <script>
       async function verstuur() {
         const vraag = document.getElementById("vraag").value;
+
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: vraag }),
+          body: JSON.stringify({
+            message: vraag,
+            klantId: "autobedrijf123" // 👈 Pas dit aan per klant
+          }),
         });
 
         const data = await res.json();
