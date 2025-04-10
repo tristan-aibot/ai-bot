@@ -3,7 +3,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Alleen POST-verzoeken zijn toegestaan" });
   }
 
-  const { message } = req.body;
+const { message, klantId } = req.body;
+
   const apiKey = process.env.OPENAI_API_KEY;
   const projectId = process.env.OPENAI_PROJECT_ID;
 
